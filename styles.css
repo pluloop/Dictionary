@@ -1,0 +1,42 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+div{
+    width: 30rem;
+    height: 20rem;
+    border: 1px solid #a39193;
+    border-radius: 1rem;
+    background-color: #f6e0b5;
+}
+
+h1{
+    font-family: "Arial";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #aa6f73;
+}
+
+input{
+    width: 17rem;
+    height: 2rem;
+    border: 1px solid #a39193;
+    display: block;
+    margin: 3rem 3rem;
+}
+
+button{
+    width: 5rem;
+    height: 2rem;
+    border: 1px solid #a39193;
+    display: block;
+    margin: -5rem 21rem;
+    border-radius: 0.25rem;
+    color: #aa6f73;
+    background-color: #eea990;
+    font-weight: bold;
+}
