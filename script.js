@@ -1,11 +1,39 @@
-var result = document.getElementById("result")
-var textInput = document.getElementById("text-input");
+// to use current html elements
+const result = document.getElementById("result")
+const textInput = document.getElementById("text-input");
 const submitButton = document.getElementById("submit-button");
-var userInterface = document.getElementById("user-interface");
+const userInterface = document.getElementById("user-interface");
+
+// to use future html elements
+const vocabTerm = document.createElement("p");
+vocabTerm.classList.add("vocab-term");
+
+const partOfSpeechText = document.createElement("p");
+partOfSpeechText.classList.add("part-speech");
+
+const definitionHeader = document.createElement("p");
+definitionHeader.classList.add("definition-header");
+
+const definition1Text = document.createElement("p");
+definition1Text.classList.add("definition1-text");
+
+const definition2Text = document.createElement("p");
+definition2Text.classList.add("definition2-text");
+
+const errorMessageBlank = document.createElement("p");
+errorMessageBlank.classList.add("blank-error");
+errorMessageBlank.innerText = "Error: you need to input a word";
+
+const errorMessageNonexistent = document.createElement("p");
+errorMessageNonexistent.classList.add("nonexistent-error");
+errorMessageNonexistent.innerText = "Error: word not on record";
+
+// to assign result of word inputted
 var partOfSpeech;
 var definition1;
 var definition2;
 
+// used to display later depending on input
 const definitions = {
     yes: {
         partOfSpeech: "noun", 
@@ -63,29 +91,7 @@ const definitions = {
     }
 }
 
-let vocabTerm = document.createElement("p");
-vocabTerm.classList.add("vocab-term");
-
-let partOfSpeechText = document.createElement("p");
-partOfSpeechText.classList.add("part-speech");
-
-let definitionHeader = document.createElement("p");
-definitionHeader.classList.add("definition-header");
-
-let definition1Text = document.createElement("p");
-definition1Text.classList.add("definition1-text");
-
-let definition2Text = document.createElement("p");
-definition2Text.classList.add("definition2-text");
-
-let errorMessageBlank = document.createElement("p");
-errorMessageBlank.classList.add("blank-error");
-errorMessageBlank.innerText = "Error: you need to input a word";
-
-let errorMessageNonexistent = document.createElement("p");
-errorMessageNonexistent.classList.add("nonexistent-error");
-errorMessageNonexistent.innerText = "Error: word not on record";
-
+// removes current definition if any
 function checkDefinition(){
     if (vocabTerm.parentElement){
         result.removeChild(vocabTerm);
@@ -96,21 +102,25 @@ function checkDefinition(){
     }
 }
 
+// removes current blank error if any
 function checkBlankError(){
     if (errorMessageBlank.parentElement){
         result.removeChild(errorMessageBlank);
     }
 }
 
+// removes current word not found error if any
 function checkNonexistentError(){
     if (errorMessageNonexistent.parentElement){
         result.removeChild(errorMessageNonexistent);
     }
 }
 
+// display definition or word not found error if input not empty
 function definition(){
     let inputValue = textInput.value.toLowerCase();
 
+    // display if 2 definitions
     if (definitions.hasOwnProperty(inputValue) && definitions[inputValue].hasOwnProperty("definition2")){
         checkNonexistentError();
         checkBlankError();
@@ -125,7 +135,7 @@ function definition(){
         result.appendChild(definition1Text);
         result.appendChild(definition2Text);
 
-        userInterface.style.height = "27rem";
+        userInterface.style.height = "30rem";
         vocabTerm.style.top = "40%";
         partOfSpeechText.style.top = "45%";
         definitionHeader.style.top = "50%";
@@ -133,6 +143,7 @@ function definition(){
         definition2Text.style.top = "62.5%";
     }
 
+    // display if 1 definition
     else if(definitions.hasOwnProperty(inputValue)){
         checkDefinition();
         checkNonexistentError();
@@ -146,13 +157,14 @@ function definition(){
         result.appendChild(definitionHeader);
         result.appendChild(definition1Text);
 
-        userInterface.style.height = "24rem";
-        vocabTerm.style.top = "44.5%";
-        partOfSpeechText.style.top = "49.5%";
-        definitionHeader.style.top = "54.5%";
-        definition1Text.style.top = "59.5%";
+        userInterface.style.height = "27.5rem";
+        vocabTerm.style.top = "42%";
+        partOfSpeechText.style.top = "47%";
+        definitionHeader.style.top = "52%";
+        definition1Text.style.top = "57%";
     }
 
+    // display nonexistent error if word not found in definitions object
     else{
         checkDefinition();
         checkNonexistentError();
@@ -163,6 +175,7 @@ function definition(){
     }
 }
 
+// checks if input is empty or not
 function checkInput(){
     result.innerHTML = "";
 
@@ -180,4 +193,5 @@ function checkInput(){
     textInput.value = "";
 }
 
+// upon search button press, check input
 submitButton.addEventListener("click", checkInput);

@@ -51,37 +51,37 @@ button{
 .definition2-text {
     position: absolute;
     top: 53.5%; 
-    left: 37.25%;
+    left: 41.65%;
     font-family: "Arial";
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: #aa6f73;
 }
 
 .vocab-term{
     top: 40%; 
-    left: 37.25%;
+    left: 41.65%;
 }
 
 .part-speech{
     top: 45%;
-    left: 37.25%;
+    left: 41.65%;
 }
 
 .definition-header{
     top: 50%;
-    left: 37.25%;
+    left: 41.65%;
 }
 
 .definition1-text{
     top: 55%;
-    left: 40%;
+    left: 43%;
     font-size: 1.4rem;
     width: 22rem;
 }
 
 .definition2-text{
     top: 62.5%;
-    left: 40%;
+    left: 43%;
     font-size: 1.4rem;
     width: 22rem;
 }
