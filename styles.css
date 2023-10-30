@@ -3,11 +3,12 @@ body{
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-color: #eea990;
 }
 
 .user-interface{
     width: 30rem;
-    height: 20rem;
+    height: 15rem;
     border: 1px solid #a39193;
     border-radius: 1rem;
     background-color: #f6e0b5;
@@ -41,8 +42,46 @@ button{
     font-weight: bold;
 }
 
-.error-message{
+.blank-error, 
+.nonexistent-error, 
+.vocab-term, 
+.part-speech, 
+.definition-header,
+.definition1-text,
+.definition2-text {
     position: absolute;
-    top: 35rem; 
-    left: 60.4rem;
+    top: 53.5%; 
+    left: 37.25%;
+    font-family: "Arial";
+    font-size: 1.5rem;
+    color: #aa6f73;
+}
+
+.vocab-term{
+    top: 40%; 
+    left: 37.25%;
+}
+
+.part-speech{
+    top: 45%;
+    left: 37.25%;
+}
+
+.definition-header{
+    top: 50%;
+    left: 37.25%;
+}
+
+.definition1-text{
+    top: 55%;
+    left: 40%;
+    font-size: 1.4rem;
+    width: 22rem;
+}
+
+.definition2-text{
+    top: 62.5%;
+    left: 40%;
+    font-size: 1.4rem;
+    width: 22rem;
 }

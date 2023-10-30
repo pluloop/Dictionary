@@ -1,6 +1,7 @@
 var result = document.getElementById("result")
 var textInput = document.getElementById("text-input");
 const submitButton = document.getElementById("submit-button");
+var userInterface = document.getElementById("user-interface");
 var partOfSpeech;
 var definition1;
 var definition2;
@@ -62,17 +63,118 @@ const definitions = {
     }
 }
 
-let errorMessage = document.createElement("p");
-errorMessage.classList.add("error-message");
-errorMessage.innerText = "Error: you need to input a word.";
+let vocabTerm = document.createElement("p");
+vocabTerm.classList.add("vocab-term");
 
-function checkInput(){
-    if (textInput.value == ""){
-        result.appendChild(errorMessage);
+let partOfSpeechText = document.createElement("p");
+partOfSpeechText.classList.add("part-speech");
+
+let definitionHeader = document.createElement("p");
+definitionHeader.classList.add("definition-header");
+
+let definition1Text = document.createElement("p");
+definition1Text.classList.add("definition1-text");
+
+let definition2Text = document.createElement("p");
+definition2Text.classList.add("definition2-text");
+
+let errorMessageBlank = document.createElement("p");
+errorMessageBlank.classList.add("blank-error");
+errorMessageBlank.innerText = "Error: you need to input a word";
+
+let errorMessageNonexistent = document.createElement("p");
+errorMessageNonexistent.classList.add("nonexistent-error");
+errorMessageNonexistent.innerText = "Error: word not on record";
+
+function checkDefinition(){
+    if (vocabTerm.parentElement){
+        result.removeChild(vocabTerm);
+        result.removeChild(partOfSpeechText);
+        result.removeChild(definitionHeader);
+        result.removeChild(definition1Text);
+        result.removeChild(definition2Text);
+    }
+}
+
+function checkBlankError(){
+    if (errorMessageBlank.parentElement){
+        result.removeChild(errorMessageBlank);
+    }
+}
+
+function checkNonexistentError(){
+    if (errorMessageNonexistent.parentElement){
+        result.removeChild(errorMessageNonexistent);
+    }
+}
+
+function definition(){
+    let inputValue = textInput.value.toLowerCase();
+
+    if (definitions.hasOwnProperty(inputValue) && definitions[inputValue].hasOwnProperty("definition2")){
+        checkNonexistentError();
+        checkBlankError();
+        vocabTerm.innerText = inputValue + ":";
+        partOfSpeechText.innerText = "part of speech: " + definitions[inputValue].partOfSpeech;
+        definitionHeader.innerText = "definition(s):";
+        definition1Text.innerText = "- " + definitions[inputValue].definition1;
+        definition2Text.innerText = "- " + definitions[inputValue].definition2;
+        result.appendChild(vocabTerm);
+        result.appendChild(partOfSpeechText);
+        result.appendChild(definitionHeader);
+        result.appendChild(definition1Text);
+        result.appendChild(definition2Text);
+
+        userInterface.style.height = "27rem";
+        vocabTerm.style.top = "40%";
+        partOfSpeechText.style.top = "45%";
+        definitionHeader.style.top = "50%";
+        definition1Text.style.top = "55%";
+        definition2Text.style.top = "62.5%";
+    }
+
+    else if(definitions.hasOwnProperty(inputValue)){
+        checkDefinition();
+        checkNonexistentError();
+        
+        vocabTerm.innerText = inputValue + ":";
+        partOfSpeechText.innerText = "part of speech: " + definitions[inputValue].partOfSpeech;
+        definitionHeader.innerText = "definition(s):";
+        definition1Text.innerText = "- " + definitions[inputValue].definition1;
+        result.appendChild(vocabTerm);
+        result.appendChild(partOfSpeechText);
+        result.appendChild(definitionHeader);
+        result.appendChild(definition1Text);
+
+        userInterface.style.height = "24rem";
+        vocabTerm.style.top = "44.5%";
+        partOfSpeechText.style.top = "49.5%";
+        definitionHeader.style.top = "54.5%";
+        definition1Text.style.top = "59.5%";
     }
 
     else{
-        result.removeChild(errorMessage);
+        checkDefinition();
+        checkNonexistentError();
+        checkBlankError();
+        result.appendChild(errorMessageNonexistent);
+
+        userInterface.style.height = "15rem";
+    }
+}
+
+function checkInput(){
+    result.innerHTML = "";
+
+    if (textInput.value == ""){
+        userInterface.style.height = "15rem";
+        result.appendChild(errorMessageBlank);
+        checkNonexistentError();
+        checkDefinition();
+    }
+
+    else{
+        definition();
     }
 
     textInput.value = "";
